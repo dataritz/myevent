@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import About from "./pages/About";
 import Contatct from "./pages/Contatct";
 import SignIn from "./pages/SignIn";
-import Signup from "./pages/Signup";
+import SignupParent from "./pages/SignupParent";
 import Navbar from "./pages/Navbar";
 import Home from "./pages/Home";
 const App = () => {
@@ -15,7 +15,7 @@ const App = () => {
           <Route path="/about" element={<About />}></Route>
           <Route path="/contact" element={<Contatct />}></Route>
           <Route path="/signin" element={<SignIn />}></Route>
-          <Route path="/signup" element={<Signup />}></Route>
+          <Route path="/signup" element={<SignupParent />}></Route>
         </Routes>
       </BrowserRouter>
     </>
