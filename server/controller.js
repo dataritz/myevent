@@ -24,6 +24,28 @@ const signUp = async (req,res)=>{
 
 }
 
+const signIn = async (req,res)=>{
+  try {
+    const client = await MongoClient.connect('mongodb://localhost:27017/');
+    const coll = client.db('event').collection('signup');
+    const result = await coll.findOne({email:req.body.email})
+    client.close();
+    if(result){
+      const isvaliduser = await bcrypt.compare(req.body.password,result.password);
+      if(isvaliduser)
+        return res.json({valid:1});
+      else
+        return res.json({valid:0});
+    }
+    else{
+      return res.json({valid:0})
+    }
+  } catch (error) {
+    return res.send("Internal Server Error");
+  }
+
+}
+
 const addEvent = async (req,res)=>{
   try {
     const client = await MongoClient.connect('mongodb://localhost:27017/');
@@ -58,4 +80,4 @@ const searchDate = async (req,res)=>{
 res.json(data);
 }
 
-module.exports = {home,signUp,addEvent,searchName,searchDate};
+module.exports = {home,signUp,addEvent,searchName,searchDate,signIn};
