@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
-
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 export default function Navbar() {
+  const { token } = useContext(AuthContext);
   return (
     <div className="container">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -31,21 +33,34 @@ export default function Navbar() {
                   About
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/contact">
-                  Contact
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/signin">
-                  SignIn
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="signup">
-                  SignUp
-                </NavLink>
-              </li>
+
+              {token == null ? (
+                <>
+                  <li className="nav-item">
+                    <NavLink className="nav-link" to="/signin">
+                      SignIn
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link" to="signup">
+                      SignUp
+                    </NavLink>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li className="nav-item">
+                    <NavLink className="nav-link" to="/contact">
+                      Contact
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link" to="logout">
+                      Logout
+                    </NavLink>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>

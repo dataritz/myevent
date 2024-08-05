@@ -1,5 +1,6 @@
 const { MongoClient } = require('mongodb');
 const bcrypt = require('bcrypt');
+const {generateAccessToken,verifyAccessToken}  = require('./jwtToken')
 const home = async (req,res)=>{
   res.send("Welcome");
 }
@@ -32,8 +33,10 @@ const signIn = async (req,res)=>{
     client.close();
     if(result){
       const isvaliduser = await bcrypt.compare(req.body.password,result.password);
-      if(isvaliduser)
-        return res.json({valid:1});
+      if(isvaliduser){
+        const token = await generateAccessToken(req.body.email);
+        return res.json({valid:1,token});
+      }
       else
         return res.json({valid:0});
     }

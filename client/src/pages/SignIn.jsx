@@ -1,6 +1,7 @@
 import Signinform from "../component/Signinform";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 export default function SignIn() {
   const [userinfo, setuserinfo] = useState({
     email: "",
@@ -12,6 +13,7 @@ export default function SignIn() {
     let value = event.target.value;
     setuserinfo({ ...userinfo, [targetname]: value });
   };
+  const { saveToken } = useContext(AuthContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,8 +26,10 @@ export default function SignIn() {
         body: await JSON.stringify(userinfo),
       });
       const x = await response.json();
+      console.log(x.token);
       if (x.valid == 1) {
-        navigate("/home");
+        saveToken(x.token);
+        navigate("/");
       } else {
         alert("Not Valid User");
       }

@@ -5,6 +5,7 @@ import SignIn from "./pages/SignIn";
 import SignupParent from "./pages/SignupParent";
 import Navbar from "./pages/Navbar";
 import Home from "./pages/Home";
+import Logout from "./pages/Logout";
 const App = () => {
   return (
     <>
@@ -16,6 +17,7 @@ const App = () => {
           <Route path="/contact" element={<Contatct />}></Route>
           <Route path="/signin" element={<SignIn />}></Route>
           <Route path="/signup" element={<SignupParent />}></Route>
+          <Route path="/logout" element={<Logout />}></Route>
         </Routes>
       </BrowserRouter>
     </>
