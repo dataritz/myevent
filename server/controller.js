@@ -50,11 +50,12 @@ const signIn = async (req,res)=>{
 }
 
 const addEvent = async (req,res)=>{
-  try {
+   try {
     const client = await MongoClient.connect('mongodb://localhost:27017/');
     const coll = client.db('event').collection('eventtable');
     const data = req.body;
-    console.log(data.startdate);
+    data.eventimg = req.file.filename;
+    console.log(data);
     data.startdate = new Date(data.startdate).toLocaleString();
     await coll.insertOne(data);
     client.close();

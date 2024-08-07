@@ -1,8 +1,9 @@
 import Signinform from "../component/Signinform";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 export default function SignIn() {
+  const { saveToken } = useAuth();
   const [userinfo, setuserinfo] = useState({
     email: "",
     password: "",
@@ -13,7 +14,6 @@ export default function SignIn() {
     let value = event.target.value;
     setuserinfo({ ...userinfo, [targetname]: value });
   };
-  const { saveToken } = useContext(AuthContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

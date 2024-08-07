@@ -1,4 +1,9 @@
-export default function AddeventUi({ eventinfo, handleInput, handleSubmit }) {
+export default function AddeventUi({
+  eventinfo,
+  handleInputimage,
+  handleInput,
+  handleSubmit,
+}) {
   return (
     <>
       <div className="container mt-3">
@@ -57,6 +62,12 @@ export default function AddeventUi({ eventinfo, handleInput, handleSubmit }) {
             placeholder="Departement"
             value={eventinfo.deptt}
             onChange={handleInput}
+          ></input>
+          <input
+            type="file"
+            className="form-control mt-3"
+            name="eventimg"
+            onChange={handleInputimage}
           ></input>
           <button className="btn btn-outline-primary mt-3">Add Event</button>
         </form>

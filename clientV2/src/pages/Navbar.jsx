@@ -1,8 +1,7 @@
 import { NavLink } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 export default function Navbar() {
-  const { authinfo } = useContext(AuthContext);
+  const { authinfo } = useAuth();
   return (
     <div className="container">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
